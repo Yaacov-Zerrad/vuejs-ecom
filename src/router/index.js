@@ -11,7 +11,9 @@ import SignUp from '../views/SignUp.vue'
 import LogIn from '../views/LogIn.vue'
 import MyAccount from '../views/MyAccount.vue'
 import Checkout from '../views/Checkout.vue'
+import CheckoutPaypal from '../views/CheckoutPaypal.vue'
 import Success from '../views/Success.vue'
+import NewProduct from '../views/NewProduct.vue'
 
 const routes = [
   {
@@ -73,7 +75,7 @@ const routes = [
     component: MyAccount,
     meta:{
       requireLogin: true,
-      title: 'my account'
+      title: 'My account'
     }
   },
   {
@@ -91,7 +93,25 @@ const routes = [
     component: Checkout,
     meta:{
       requireLogin: true,
-      title: 'checkout',
+      title: 'Checkout',
+    }
+  },
+  {
+    path:'/new-product',
+    name: 'NewProduct',
+    component: NewProduct,
+    meta:{
+      requireLogin: true,
+      title: 'New product',
+    }
+  },
+  {
+    path:'/cart/checkout-paypal',
+    name: 'CheckoutPaypal',
+    component: CheckoutPaypal,
+    meta:{
+      requireLogin: true,
+      title: 'Checkout Paypal',
     }
   },
   {

@@ -151,15 +151,15 @@ export default {
     mounted() {
 
 
-        this.cart = this.$store.state.cart
+        this.cart = this.$store.state.cart;
 
-        if (this.cartTotalLength > 0) {
-            this.stripe = Stripe('pk_test_51LbpnBKOuYwcxSsUo4PR3tRqj5kYM0qmD9CztxbzwfYlWQVwDPgR0FQvUzUzpeFfFY5PmYOvsdp2PI3agXuqpVHr00ijjpSFKk')
-            const elements = this.stripe.elements()
-            this.card = elements.create('card', { hidePostalCode: true})
+        // if (this.cartTotalLength > 0) {
+        //     this.stripe = Stripe('pk_test_51LbpnBKOuYwcxSsUo4PR3tRqj5kYM0qmD9CztxbzwfYlWQVwDPgR0FQvUzUzpeFfFY5PmYOvsdp2PI3agXuqpVHr00ijjpSFKk')
+        //     const elements = this.stripe.elements()
+        //     this.card = elements.create('card', { hidePostalCode: true})
 
-            this.cars.mount('#card-element')
-        }
+        //     this.cars.mount('#card-element')
+        // }
     },
     methods: {
         getItemTotal(item) {
@@ -193,21 +193,21 @@ export default {
             if (!this.errors.length) {
                 this.$store.commit('setIsLoading', true)
 
-                this.stripe.createToken(this.card.then(result => {
-                    if (result.error) {
-                        this.$store.commit('setIsLoading', false)
+                // this.stripe.createToken(this.card.then(result => {
+                //     if (result.error) {
+                //         this.$store.commit('setIsLoading', false)
 
-                        this.errors.push('Something went wrong with Stipe. Please try again')
+                //         this.errors.push('Something went wrong with Stipe. Please try again')
 
-                        console.log(result.error.message)
-                    } else {
-                        this.stripeTokenHandler(result.token)
-                    }
-                }))
+                //         console.log(result.error.message)
+                //     } else {
+                        this.paypal_envoi()
+                //     }
+                // }))
             }
 
         },
-        async stripeTokenHandler(token){
+        async paypal_envoi(){
             const items = []
 
             for (let i = 0; i < this.cart.items.length; i++){
@@ -215,10 +215,10 @@ export default {
                 const obj = {
                     product: item.product.id,
                     quantity: item.quantity,
-                    price: item.product.price * item.quantity
+                    price: item.product.price * item.quantity,
                 }
 
-                item.push(obj)
+                items.push(item)
             }
 
             const data = {
@@ -230,14 +230,14 @@ export default {
                 'zipcode': this.zipcode,
                 'place': this.place,
                 'items': items,
-                'stripe_token':token.id
+                // 'stripe_token':token.id
             
             }
-
+console.log('asdf')
             await axios
-                .post('api/v1/checkout/', data)
+                .post('api/v1/checkout/paypal', data)
                 .then (response => {
-                    this.$store.commit('clearCart')
+                    // this.$store.commit('clearCart')
                     this.$router.push('/cart/success')
                 })
                 .catch(error => {
