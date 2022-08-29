@@ -114,9 +114,8 @@
                     <template v-if="cartTotalLength">
                     
                     <hr>
-
                     <button class="button is-dark" @click="submitForm">Pay </button>
-
+                        
                     </template>
 
 
@@ -149,17 +148,24 @@ export default {
         }
     },
     mounted() {
-
+            paypal.Buttons({
+            style: {
+                layout: 'vertical',
+                color:  'blue',
+                shape:  'rect',
+                label:  'paypal'
+            }
+            }).render('#paypal-button-container');
 
         this.cart = this.$store.state.cart;
 
-        // if (this.cartTotalLength > 0) {
-        //     this.stripe = Stripe('pk_test_51LbpnBKOuYwcxSsUo4PR3tRqj5kYM0qmD9CztxbzwfYlWQVwDPgR0FQvUzUzpeFfFY5PmYOvsdp2PI3agXuqpVHr00ijjpSFKk')
-        //     const elements = this.stripe.elements()
-        //     this.card = elements.create('card', { hidePostalCode: true})
-
-        //     this.cars.mount('#card-element')
-        // }
+        if (this.cartTotalLength > 0) {
+            // this.stripe = Stripe('pk_test_51LbpnBKOuYwcxSsUo4PR3tRqj5kYM0qmD9CztxbzwfYlWQVwDPgR0FQvUzUzpeFfFY5PmYOvsdp2PI3agXuqpVHr00ijjpSFKk')
+            // const elements = this.stripe.elements()
+            // this.card = elements.create('card', { hidePostalCode: true})
+            console.log(' != 0')
+            this.card.mount('#card-element')
+        }
     },
     methods: {
         getItemTotal(item) {
