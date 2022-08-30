@@ -210,6 +210,7 @@ export default {
                 //         console.log(result.error.message)
                 //     } else {
                         this.paypal_send()
+
                 //     }
                 // }))
             }
@@ -226,9 +227,9 @@ export default {
                     price: item.product.price * item.quantity,
                 }
 
-                items.push(item)
+                items.push(obj)
             }
-
+            console.log(items);
             const data = {
                 'first_name': this.first_name,
                 'last_name': this.last_name,
@@ -238,7 +239,7 @@ export default {
                 'zipcode': this.zipcode,
                 'place': this.place,
                 'items': items,
-                'paid_amount': this.amount,
+                // 'paid_amount': this.amount,
                 // 'stripe_token':token.id
             
             }
