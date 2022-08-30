@@ -106,7 +106,7 @@ const routes = [
     }
   },
   {
-    path:'/cart/checkout-paypal',
+    path:'/cart/paypal',
     name: 'CheckoutPaypal',
     component: CheckoutPaypal,
     meta:{

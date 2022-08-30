@@ -37,7 +37,7 @@
                     </tfoot>
                 </table>
             </div>
-
+                            <PaypalBox :price="amount" />
             <div class="column is-12 box">
                 <h2 class="subtitle">Shipping detail</h2>
 
@@ -115,6 +115,7 @@
                     
                     <hr>
                     <button class="button is-dark" @click="submitForm">Pay </button>
+ 
                         
                     </template>
 
@@ -127,9 +128,11 @@
 
 <script>
 import axios from 'axios'
+import PaypalBox from "@/components/PaypalBox.vue";
+
 
 export default {
-    name: "Checkout",
+    name: "CheckoutPaypal",
     data() {
         return {
             cart: {
@@ -145,26 +148,25 @@ export default {
             zipcode: '',
             place: '',
             errors: [],
+            amount: 0.00,
+
+            
         }
     },
+  components: {
+    PaypalBox,
+  },
     mounted() {
-            paypal.Buttons({
-            style: {
-                layout: 'vertical',
-                color:  'blue',
-                shape:  'rect',
-                label:  'paypal'
-            }
-            }).render('#paypal-button-container');
-
         this.cart = this.$store.state.cart;
+            this.amount = this.cartTotalPrice.toFixed(2)
+            
 
         if (this.cartTotalLength > 0) {
             // this.stripe = Stripe('pk_test_51LbpnBKOuYwcxSsUo4PR3tRqj5kYM0qmD9CztxbzwfYlWQVwDPgR0FQvUzUzpeFfFY5PmYOvsdp2PI3agXuqpVHr00ijjpSFKk')
             // const elements = this.stripe.elements()
             // this.card = elements.create('card', { hidePostalCode: true})
-            console.log(' != 0')
-            this.card.mount('#card-element')
+            
+            // this.card.mount('#card-element')
         }
     },
     methods: {
@@ -207,13 +209,13 @@ export default {
 
                 //         console.log(result.error.message)
                 //     } else {
-                        this.paypal_envoi()
+                        this.paypal_send()
                 //     }
                 // }))
             }
 
         },
-        async paypal_envoi(){
+        async paypal_send(){
             const items = []
 
             for (let i = 0; i < this.cart.items.length; i++){
@@ -236,10 +238,11 @@ export default {
                 'zipcode': this.zipcode,
                 'place': this.place,
                 'items': items,
+                'paid_amount': this.amount,
                 // 'stripe_token':token.id
             
             }
-console.log('asdf')
+
             await axios
                 .post('api/v1/checkout/paypal', data)
                 .then (response => {

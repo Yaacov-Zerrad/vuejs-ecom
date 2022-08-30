@@ -36,7 +36,7 @@
 
                 <hr>
 
-                <router-link to="/cart/checkout" class="button is-dark">Proceed to checkout</router-link>
+                <router-link to="/cart/paypal" class="button is-dark">Proceed to checkout</router-link>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@ export default {
                 items: []
             }
         }
-    },
+    }, 
     mounted(){
         this.cart = this.$store.state.cart
     },
