@@ -37,8 +37,10 @@
                     </tfoot>
                 </table>
             </div>
-                            <PaypalBox :price="amount" />
-            <div class="column is-12 box">
+                            <PaypalBox :price="amount" v-if="success" />
+
+
+            <div class="column is-12 box" v-if="!success">
                 <h2 class="subtitle">Shipping detail</h2>
 
                 <p class="has-text-grey mb-4">* All fields are required</p>
@@ -135,6 +137,7 @@ export default {
     name: "CheckoutPaypal",
     data() {
         return {
+            success: false,
             cart: {
                 items: []
             },
@@ -229,7 +232,6 @@ export default {
 
                 items.push(obj)
             }
-            console.log(items);
             const data = {
                 'first_name': this.first_name,
                 'last_name': this.last_name,
@@ -247,8 +249,9 @@ export default {
             await axios
                 .post('api/v1/checkout/paypal', data)
                 .then (response => {
-                    // this.$store.commit('clearCart')
-                    this.$router.push('/cart/success')
+                    // 
+                    this.success = true
+                    // this.$router.push('/cart/success')
                 })
                 .catch(error => {
                     this.errors.push('Somethig went wrong. Please try again')
@@ -257,6 +260,7 @@ export default {
                 })
 
                 this.$store.commit('setIsLoading', false)
+                
         }
     },
     computed: {

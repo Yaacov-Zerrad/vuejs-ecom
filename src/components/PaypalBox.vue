@@ -29,13 +29,14 @@ export default {
     },
     mounted() {
       this.cart = this.$store.state.cart;
+      
       this.amar = this.cartTotalPrice
       this.amount_v = parseFloat(parseFloat(this.amar).toFixed(2))
-
+  
 
       const myprice = this.amount_v
 
-
+      
 
 
 
@@ -63,12 +64,15 @@ export default {
 
                 // Finalize the transaction
                 onApprove(data, actions) {
+                    dt = this.$router.push('/cart/success')
                     return actions.order.capture().then(function(details)  {
                         // Show a success message to the buyer
                         var capture_json = JSON.stringify(details, null, 2)
-                  console.log('asdf', capture_json);
+                        console.log('asdf', capture_json);
                         console.log(details);
+                        localStorage.setItem('cart', '')
                         alert(`Transaction completed by ${details.payer.name.given_name}`);
+                        
                     });
                 },
 
@@ -89,7 +93,9 @@ export default {
 
     },
     methods:{
-
+        clearCart(){
+            this.$store.commit('clearCart')
+        }
 
     
   }

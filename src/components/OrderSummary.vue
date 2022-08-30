@@ -1,6 +1,10 @@
 <template>
   <div class="box mb-4">
-    <div class="is-size-4 mb-6">Order #{{ order.id }}</div>
+    <div class="columns is-multiline">
+       <div class="column is-size-4 mb-6">Order # {{ order.id }}</div>
+       <div class="column is-size-4 mb-6">Total Payed:  ${{ order.paid_amount }}</div>
+  </div>
+   
     <h4 class="is-size-5">Products</h4>
 
     <table class="table is-fullwidth">
