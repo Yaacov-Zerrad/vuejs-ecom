@@ -73,6 +73,7 @@ const routes = [
     path:'/my-account',
     name: 'MyAccount',
     component: MyAccount,
+    props:true,
     meta:{
       requireLogin: true,
       title: 'My account'
@@ -109,6 +110,7 @@ const routes = [
     path:'/cart/paypal',
     name: 'CheckoutPaypal',
     component: CheckoutPaypal,
+    props:true,
     meta:{
       requireLogin: true,
       title: 'Checkout Paypal',

@@ -1,51 +1,59 @@
 <template>
   <div class="column is-6">
     <div class="box">
+            <div><p>if paypal button not foun <router-link to="/my-account" class="button is-light">Click here</router-link> for payed in your account or reload</p></div>
             <div id="paypal-button" />
-<div class="button" @click="cleanCart">clean</div>
+
     </div>
   </div>
 </template>
 
 <script>
+import axios from 'axios';
 
-// import { PayPal } from 'vue-paypal-checkout'
-// import { loadScript } from '@paypal/paypal-js';
 export default {
     name: 'PaypalBox',
     props: {
       price: Number,
+      order_id: String,
     },
-  //   computed: {
-  //   // computed property that auto-updates when the prop changes
-  //   normalizedSize() {
-  //     return this.price
-  //   },
-  // },
+
     data(){
       return {
-
+        errors : this.errors,
+        paypal_id : ''
       }
     },
     mounted() {
       this.cart = this.$store.state.cart;
       
-      this.amar = this.cartTotalPrice
-      this.amount_v = parseFloat(parseFloat(this.amar).toFixed(2))
-      const store = this.$store
-      const router = this.$router
 
-      const myprice = this.amount_v
+        const router = this.$router
+        const order_id = this.order_id
+        const amount = this.price
 
       
-        function clearCart(){
-            store.commit('clearCart')
-            router.push('/cart/success')
+
+        function axiosForPaypal(payid, orderid){
+            const data =  {
+                            payed: true,
+                            num_order : payid
+                            }
+            axios
+                .put(`api/v1/checkout/valid-paypal/${orderid}/`, data)
+                .then(response => 
+                console.log('success')
+                )
+                .catch(error => {
+                    // this.errors.push('Somethig went wrong. Please try again')
+                    console.log(error)
+                })
         }
 
 
         function loadScript(url, callback) {
             const el = document.querySelector(`script[src="${url}"]`);
+            
             if (!el) {
                 const s = document.createElement('script');
                 s.setAttribute('src', url); s.onload = callback;
@@ -60,7 +68,7 @@ export default {
                     return actions.order.create({
                         purchase_units: [{
                             amount: {
-                                value:  myprice ,
+                                value:  amount ,
                             },
                         }],
                     });
@@ -68,13 +76,17 @@ export default {
 
                 // Finalize the transaction
                 onApprove(data, actions) {
-                    c = clearCart()
                     return actions.order.capture().then(function(details)  {
                         // Show a success message to the buyer
                         var capture_json = JSON.stringify(details, null, 2)
                         console.log('asdf', capture_json);
                         console.log(details);
-                        c
+                        const paypalid = details.id
+                        const  orderid = order_id
+
+                        router.push('/cart/success')
+                        axiosForPaypal(paypalid, orderid)
+
                         alert(`Transaction completed by ${details.payer.name.given_name}`);
                         
                     });
@@ -97,7 +109,7 @@ export default {
 
     },
     methods:{
-    
+        
   }
 
 }

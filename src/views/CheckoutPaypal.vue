@@ -37,7 +37,7 @@
                     </tfoot>
                 </table>
             </div>
-                            <PaypalBox :price="amount" v-if="!success" />
+                            <PaypalBox :price="amount" :order_id="order_id" v-if="success" />
 
 
             <div class="column is-12 box" v-if="!success">
@@ -152,6 +152,7 @@ export default {
             place: '',
             errors: [],
             amount: 0.00,
+            order_id: '',
 
             
         }
@@ -162,8 +163,7 @@ export default {
     mounted() {
         this.cart = this.$store.state.cart;
             this.amount = this.cartTotalPrice.toFixed(2)
-            
-
+                
         if (this.cartTotalLength > 0) {
             // this.stripe = Stripe('pk_test_51LbpnBKOuYwcxSsUo4PR3tRqj5kYM0qmD9CztxbzwfYlWQVwDPgR0FQvUzUzpeFfFY5PmYOvsdp2PI3agXuqpVHr00ijjpSFKk')
             // const elements = this.stripe.elements()
@@ -204,18 +204,7 @@ export default {
             if (!this.errors.length) {
                 this.$store.commit('setIsLoading', true)
 
-                // this.stripe.createToken(this.card.then(result => {
-                //     if (result.error) {
-                //         this.$store.commit('setIsLoading', false)
-
-                //         this.errors.push('Something went wrong with Stipe. Please try again')
-
-                //         console.log(result.error.message)
-                //     } else {
-                        this.paypal_send()
-
-                //     }
-                // }))
+                this.paypal_send()
             }
 
         },
@@ -241,18 +230,18 @@ export default {
                 'zipcode': this.zipcode,
                 'place': this.place,
                 'items': items,
-                // 'paid_amount': this.amount,
-                // 'stripe_token':token.id
+
             
             }
 
             await axios
                 .post('api/v1/checkout/paypal', data)
                 .then (response => {
-                    // 
+                    console.log(response);
                     this.success = true
-                    // this.$router.push('/cart/success')
+                    this.order_id = response.data.id
                     this.$store.commit('clearCart')
+                    // this.$router.push('/cart/success')
                 })
                 .catch(error => {
                     this.errors.push('Somethig went wrong. Please try again')

@@ -36,7 +36,8 @@ export default {
     },
     data(){
         return {
-            orders: []
+            orders: [],
+            success: false,
         }
     },
     mounted(){
