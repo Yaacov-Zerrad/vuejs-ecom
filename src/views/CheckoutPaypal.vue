@@ -37,7 +37,7 @@
                     </tfoot>
                 </table>
             </div>
-                            <PaypalBox :price="amount" v-if="success" />
+                            <PaypalBox :price="amount" v-if="!success" />
 
 
             <div class="column is-12 box" v-if="!success">
@@ -252,6 +252,7 @@ export default {
                     // 
                     this.success = true
                     // this.$router.push('/cart/success')
+                    this.$store.commit('clearCart')
                 })
                 .catch(error => {
                     this.errors.push('Somethig went wrong. Please try again')

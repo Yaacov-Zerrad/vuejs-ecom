@@ -2,7 +2,7 @@
   <div class="column is-6">
     <div class="box">
             <div id="paypal-button" />
-
+<div class="button" @click="cleanCart">clean</div>
     </div>
   </div>
 </template>
@@ -32,12 +32,16 @@ export default {
       
       this.amar = this.cartTotalPrice
       this.amount_v = parseFloat(parseFloat(this.amar).toFixed(2))
-  
+      const store = this.$store
+      const router = this.$router
 
       const myprice = this.amount_v
 
       
-
+        function clearCart(){
+            store.commit('clearCart')
+            router.push('/cart/success')
+        }
 
 
         function loadScript(url, callback) {
@@ -64,13 +68,13 @@ export default {
 
                 // Finalize the transaction
                 onApprove(data, actions) {
-                    dt = this.$router.push('/cart/success')
+                    c = clearCart()
                     return actions.order.capture().then(function(details)  {
                         // Show a success message to the buyer
                         var capture_json = JSON.stringify(details, null, 2)
                         console.log('asdf', capture_json);
                         console.log(details);
-                        localStorage.setItem('cart', '')
+                        c
                         alert(`Transaction completed by ${details.payer.name.given_name}`);
                         
                     });
@@ -93,10 +97,6 @@ export default {
 
     },
     methods:{
-        clearCart(){
-            this.$store.commit('clearCart')
-        }
-
     
   }
 

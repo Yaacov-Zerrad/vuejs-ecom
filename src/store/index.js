@@ -55,7 +55,7 @@ export default createStore({
     },
     clearCart(state) {
       state.cart = { items : []}
-
+      localStorage.cart = JSON.stringify(state.cart)
       // localeStorage.setItem('cart', JSON.stringify(state.cart))
     }
   },
