@@ -2,7 +2,7 @@
 <div class="column is-3">
       <div class="box">
         <figure class="image mb-4">
-          <img :src="product.get_thumbnail">
+          <img :src="product.thumbnail">
         </figure>
 
         <h3 class="is-size-4">{{ product.name }}</h3>
