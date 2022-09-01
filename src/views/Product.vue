@@ -3,7 +3,7 @@
         <div class="columns is-multiline">
             <div class="column is-9">
                 <figure class="image mb-6">
-                    <img :src="product.get_image" />
+                    <img :src="product.image" />
                 </figure>
 
                 <h1 class="title">{{ product.name }}</h1>
