@@ -58,7 +58,7 @@ export default {
         };
     },
     mounted() {
-        document.title = "Log In | ETalit";
+        document.title = "Log In | E-allergy";
     },
     methods: {
         async submitForm() {

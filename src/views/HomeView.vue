@@ -2,8 +2,8 @@
   <div class="home">
     <section class="hero is-medium is-dark mb-6">
       <div class="hero-body has-text-centered">
-        <p class="title mb-6">Welcom to E-talit</p>
-        <p class="subtitle">The best talit store online</p>
+        <p class="title mb-6">Welcom to E-allergy</p>
+        <p class="subtitle">The best store online for people with an allergy</p>
       </div>
     </section>
 
@@ -38,7 +38,7 @@ export default {
   mounted() {
     this.getLastetProducts();
 
-    document.title = "Home | ETalit";
+    document.title = "Home | E-allergy";
   },
   methods: {
     async getLastetProducts() {
