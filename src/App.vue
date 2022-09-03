@@ -35,8 +35,8 @@
                     </div>
                 </div>
                 <div class="navbar-end">
-                    <router-link to="/summer" class="navbar-item">lactose</router-link>
-                    <router-link to="/winter" class="navbar-item">soy</router-link>
+                    <router-link to="/lactose" class="navbar-item">lactose</router-link>
+                    <router-link to="/soy" class="navbar-item">soy</router-link>
 
                     <div class="navbar-item">
                         <div class="buttons">
