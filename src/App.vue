@@ -3,7 +3,7 @@
         <nav class="navbar is-dark">
             <div id="wrapper">
                 <div class="navbar-brand">
-                    <router-link to="/" class="navbar-item"><strong>E-commerce</strong></router-link>
+                    <router-link to="/" class="navbar-item"><strong>E-allergy</strong></router-link>
                     <a class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbar-menu"
                         @click="showMobileMenu = !showMobileMenu">
                         <span aria-hidden="true"></span>
@@ -35,8 +35,8 @@
                     </div>
                 </div>
                 <div class="navbar-end">
-                    <router-link to="/summer" class="navbar-item">Big</router-link>
-                    <router-link to="/winter" class="navbar-item">Small</router-link>
+                    <router-link to="/summer" class="navbar-item">lactose</router-link>
+                    <router-link to="/winter" class="navbar-item">soy</router-link>
 
                     <div class="navbar-item">
                         <div class="buttons">
