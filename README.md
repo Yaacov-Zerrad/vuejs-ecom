@@ -7,6 +7,8 @@
   https://api-ecom-pre.herokuapp.com/
   
 #### Here are the main addresses to add to access the different part of the API
+example:
+	https://api-ecom-pre.herokuapp.com/api/v1/latest-products/
 
  ![Screenshot](screen3.png) 
  
