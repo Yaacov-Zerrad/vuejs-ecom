@@ -8,7 +8,7 @@
   
 #### Here are the main addresses to add to access the different part of the API
 
- ![Screenshot](screen2.png) 
+ ![Screenshot](screen3.png) 
  
 #### and the rest, 
 	as important especially for the login even if the one if only needs a link to redirect it where it is necessary
