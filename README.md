@@ -1,4 +1,7 @@
 # ecom_vue
+##### for look the project:
+  https://ecom-present.netlify.app/
+
 
 ## The api of this project can be found on the github repository:
   https://github.com/Yaacov-Zerrad/e-talit
@@ -16,7 +19,8 @@ example:
 	as important especially for the login even if the one if only needs a link to redirect it where it is necessary
  ![Screenshot](screen1.png) 
  
- 
+### sample page
+ ![Screenshot](screen_vue1.png)  ![Screenshot](screen_vue2.png) ![Screenshot](screen_vue3.png) ![Screenshot](screen_vue4.png)
 ## Project setup
 ```
 npm install
