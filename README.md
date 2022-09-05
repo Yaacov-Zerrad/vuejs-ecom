@@ -1,11 +1,20 @@
 # ecom_vue
 
-## the api of this project can be found on the github repository:
+## The api of this project can be found on the github repository:
   https://github.com/Yaacov-Zerrad/e-talit
-![Screenshot](screen1.png) 
-## you can also find the api online with the link:
+
+## You can also find the api online with the link:
   https://api-ecom-pre.herokuapp.com/
+  
+#### Here are the main addresses to add to access the different part of the API
+
+ ![Screenshot](screen2.png) 
+ 
+#### and the rest, 
+	as important especially for the login even if the one if only needs a link to redirect it where it is necessary
  ![Screenshot](screen1.png) 
+ 
+ 
 ## Project setup
 ```
 npm install
